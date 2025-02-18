@@ -9,11 +9,27 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
       },
-      idDoctor: {
-        type: Sequelize.INTEGER
+      idPatientOfDoctor: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        references:{
+          model: {
+            tableName: 'Doctors',
+            name: 'idPatientOfDoctor'
+          },
+          key: 'id',
+        },
       },
-      idClinic: {
-        type: Sequelize.INTEGER
+      idPatientOfClinic: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        references:{
+          model: {
+            tableName: 'Clinics',
+            name: 'idPatientOfClinic'
+          },
+          key: 'id',
+        },
       },
       fullName: {
         type: Sequelize.STRING
