@@ -1,21 +1,14 @@
 import jwt from 'jsonwebtoken';
-import path from 'path';
-import fs from 'fs';
-
-const parentDir = path.join(__dirname, '..');
-
-const publicKey = fs.readFileSync(path.join(parentDir, './controllers/token/public.pem'));
-
 const middlewareController = {
 	verifyToken: (req, res, next) => {
 		const token = req.headers.token;
-		if (token!==undefined) {
+		if (token) {
 			const accessToken = token.split(' ')[1];
-			jwt.verify(accessToken, publicKey, (err, doctor) => {
+			jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, (err, doctor) => {
 				if (err) {
 					return res.status(403).json({ 
-						refreshToken: true,
-						message: 'Token is error. Reload window...' 
+						isLogin: false,
+						message: 'Invalid access token' 
 					});
 				}
 				req.doctor = doctor;
@@ -24,7 +17,15 @@ const middlewareController = {
 		} else {
 			return res.status(401).json({ status: "You're not authenticated" });
 		}
-	}
+	},
+	verifyTokenAndAdminAuth: (req, res, next) => {
+		middlewareController.verifyToken(req, res, () => {
+			if (req.user.roleId == 1) {
+				next();
+			} else {
+				res.status(403).json({ status: "You're not allowed!" });
+			}
+		});
+	},
 };
-
 export default middlewareController;

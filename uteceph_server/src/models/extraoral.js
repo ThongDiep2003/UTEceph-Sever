@@ -11,10 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      ExtraOral.belongsTo(models.Patient, {foreignKey:{name: 'idPatientExtraoral', allowNull:false}, targetKey:'id'});
+      ExtraOral.belongsTo(models.Patient, {foreignKey:{name: 'idExtraoral', allowNull:false}, targetKey:'id'});
     }
   }
   ExtraOral.init({
+    idExtraOral:DataTypes.INTEGER,
     faceAsymetry: DataTypes.STRING,
     chin: DataTypes.STRING,
     lipCompetence: DataTypes.STRING,

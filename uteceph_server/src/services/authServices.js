@@ -1,74 +1,40 @@
-"use strict";
 const db = require("../models");
-import bcrypt from "bcrypt";
-import logger from "../config/winston";
+import bcrypt from 'bcrypt';
+
+const salt = bcrypt.genSaltSync(10);
 
 const authServices = {
-  login: (email, password) => {
+  login: (data) => {
     return new Promise(async (resolve, reject) => {
       try {
         const doctor = await db.Doctor.findOne({
-          where: { email: email },
-          raw: true,
-        });
-        if (!doctor || Object.keys(doctor).length === 0) {
+          where: { email: data.email},
+          raw: true
+        })
+        if(!doctor){
           resolve({
-            data: null,
-            message: "We couldn't find your email address",
-          });
+            status: false,
+            message: 'Could not find doctor email'
+          })
         }
-        let validPassword = await bcrypt.compare(password, doctor.password);
-        if (!validPassword) {
+        let validPassword = await bcrypt.compare(data.password, doctor.password);
+        if(!validPassword){
           resolve({
-            data: null,
-            message: "password wrong",
-          });
-        } else {
-          delete doctor.password;
-          resolve({
-            data: doctor,
-            message: "login successfully",
-          });
+            staus: false,
+            message: 'wrong password'
+          })
         }
-      } catch (error) {
-        logger.doctor.error(error);
-        reject(error);
-      }
-    });
-  },
-  logout: (idDoctor, refreshToken) => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const token = await db.RefreshToken.findOne({
-          where: {
-            idDoctor: idDoctor,
-            token: refreshToken,
-          },
-        });
-        if (token) {
-          await db.RefreshToken.update(
-            {
-              isActive: false,
-            },
-            {
-              where: {
-                idDoctor: idDoctor,
-                token: refreshToken,
-              },
-              force: true,
-            }
-          );
-        }
+        delete doctor.password;
         resolve({
-          status: 200,
-          message: "logout successfully",
+          status: true,
+          message: 'login successfully',
+          data: doctor
         });
       } catch (error) {
-        logger.token.error(error);
         reject(error);
       }
     });
-  },
-};
+  }
+}
 
 export default authServices;

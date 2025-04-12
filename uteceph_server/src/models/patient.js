@@ -11,21 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Patient.hasOne(models.History, {foreignKey:'idPatient', sourceKey:'id'});
-      Patient.hasOne(models.ExtraOral, {foreignKey:'idPatient', sourceKey:'id'});
-      Patient.hasOne(models.IntraOral, {foreignKey:'idPatient', sourceKey:'id'});
-      Patient.hasOne(models.Radiography, {foreignKey:'idPatient', sourceKey:'id'});
-      Patient.hasOne(models.DiagnosisAndTreatment, {foreignKey:'idPatient', sourceKey:'id'});
-      Patient.hasMany(models.ListOfIssue, {foreignKey:'idPatient', sourceKey:'id'});
-      Patient.hasMany(models.TreatmentPlan, {foreignKey:'idPatient', sourceKey:'id'});
-      Patient.hasMany(models.TreatmentHistory, {foreignKey:'idPatient', sourceKey:'id'});
-      Patient.hasMany(models.PatientOfClinic, {foreignKey:'idPatient', sourceKey:'id'});
-      Patient.hasMany(models.PatientOfDoctor, {foreignKey:'idPatient', sourceKey:'id'});
-      Patient.hasMany(models.SharePatient, {foreignKey:'idPatient', sourceKey:'id'});
-      
+      Patient.hasOne(models.History, {foreignKey:'idHistory', sourceKey:'id'});
+      Patient.hasOne(models.ExtraOral, {foreignKey:'idExtraOral', sourceKey:'id'});
+      Patient.hasOne(models.IntraOral, {foreignKey:'idIntraOral', sourceKey:'id'});
+      Patient.hasOne(models.Radiography, {foreignKey:'idRadiography', sourceKey:'id'});
+      Patient.hasOne(models.DiagnosisAndTreatment, {foreignKey:'idDiagnosisAndTreatment', sourceKey:'id'});
+
+      Patient.hasMany(models.ListOfIssue, {foreignKey:'idListOfIssue', sourceKey:'id'});
+      Patient.hasMany(models.TreatmentPlan, {foreignKey:'idTreatmentPlan', sourceKey:'id'});
+      Patient.hasMany(models.TreatmentHistory, {foreignKey:'idTreatmentHistory', sourceKey:'id'});
+      Patient.hasMany(models.SharePatient, {foreignKey:'idSharedPatient', sourceKey:'id'});
+
+      Patient.belongsTo(models.Doctor, {foreignKey:{name: 'idPatientOfDoctor', allowNull:false}, targetKey:'id'});
+      Patient.belongsTo(models.Clinic, {foreignKey:{name: 'idPatientOfClinic', allowNull:false}, targetKey:'id'});
     }
   }
   Patient.init({
+    idPatientOfDoctor: DataTypes.INTEGER,
+    idPatientOfClinic: DataTypes.INTEGER,
     fullName: DataTypes.STRING,
     gender: DataTypes.STRING,
     birthday: DataTypes.DATE,
@@ -33,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     phoneNumber: DataTypes.STRING,
     address: DataTypes.STRING,
     chiefcomplaint: DataTypes.STRING,
+    note:DataTypes.STRING,
     updateByDoctor: DataTypes.STRING
   }, {
     sequelize,

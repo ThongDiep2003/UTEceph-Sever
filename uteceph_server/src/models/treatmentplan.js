@@ -11,12 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      TreatmentPlan.belongsTo(models.Patient, {foreignKey:{name: 'idPatientTreatmentPlan', allowNull:false}, targetKey:'id'});
+      TreatmentPlan.belongsTo(models.Patient, {foreignKey:{name: 'idTreatmentPlan', allowNull:false}, targetKey:'id'});
     }
   }
   TreatmentPlan.init({
-    idPatient: DataTypes.INTEGER,
-    plan: DataTypes.STRING
+    idTreatmentPlan: DataTypes.INTEGER,
+    plan: DataTypes.STRING,
+    selected: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'TreatmentPlan',

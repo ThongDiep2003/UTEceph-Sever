@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      ListOfIssue.belongsTo(models.Patient, {foreignKey:{name: 'idPatientListIssue', allowNull:false}, targetKey:'id'});
+      ListOfIssue.belongsTo(models.Patient, {foreignKey:{name: 'idListOfIssue', allowNull:false}, targetKey:'id'});
     }
   }
   ListOfIssue.init({
-    idPatient: DataTypes.INTEGER,
+    idListOfIssue: DataTypes.INTEGER,
     issue: DataTypes.STRING,
     treatmentObject: DataTypes.STRING,
     treatmentMethod: DataTypes.STRING,
