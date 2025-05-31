@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "src/log/lateralCeph/.2078f7ab7b458328e3cb2b774011ff2f583ad580-audit.json",
+    "files": [
+        {
+            "date": 1748108207645,
+            "name": "src/log/lateralCeph/lateralCeph-2025-05-25.log",
+            "hash": "13add1f5650b08ce2a8bc4846c48a981914fc0db98974bc57ec3dbfb8dab4e4f"
+        }
+    ],
+    "hashType": "sha256"
+}

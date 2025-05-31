@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  uteceph-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+    # If you need to use environment variables from .env.production
+    env_file:
+      - .env.production
+    restart: always

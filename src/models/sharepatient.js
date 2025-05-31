@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class SharePatient extends Model {
     /**
@@ -11,22 +9,36 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      SharePatient.belongsTo(models.Patient, {foreignKey:{name: 'idSharedPatient', allowNull:false}, targetKey:'id'});
-      SharePatient.belongsTo(models.Doctor, {foreignKey:{name: 'idSharedPatientOfDoctor', allowNull:false}, targetKey:'id'});
-      SharePatient.belongsTo(models.Clinic, {foreignKey:{name: 'idSharedPatientOfClinic', allowNull:false}, targetKey:'id'});
+      SharePatient.belongsTo(models.Patient, {
+        foreignKey: { name: "idSharedPatient", allowNull: false },
+        targetKey: "id",
+      });
+      SharePatient.belongsTo(models.Doctor, {
+        foreignKey: { name: "idSharedPatientOfDoctor", allowNull: true },
+        targetKey: "id",
+      });
+      SharePatient.belongsTo(models.Clinic, {
+        foreignKey: { name: "idSharedPatientOfClinic", allowNull: true },
+        targetKey: "id",
+      });
+      SharePatient.belongsTo(models.Doctor, {
+        foreignKey: { name: "idOwnerDoctor", allowNull: true },
+        targetKey: "id",
+      });
     }
   }
-  SharePatient.init({
-    idSharedPatient: DataTypes.INTEGER,
-    idSharedPatientOfDoctor: DataTypes.INTEGER,
-    idSharedPatientOfClinic: DataTypes.INTEGER,
-    idOwerDoctor: DataTypes.INTEGER,
-    roleOfWoerDoctor: DataTypes.STRING,
-    idOwerClinic: DataTypes.INTEGER,
-    roleOfOwerClinic: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'SharePatient',
-  });
+  SharePatient.init(
+    {
+      idSharedPatient: DataTypes.UUID,
+      idSharedPatientOfDoctor: DataTypes.UUID,
+      idSharedPatientOfClinic: DataTypes.UUID,
+      idOwnerDoctor: DataTypes.UUID,
+      roleOfOwnerDoctor: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "SharePatient",
+    }
+  );
   return SharePatient;
 };

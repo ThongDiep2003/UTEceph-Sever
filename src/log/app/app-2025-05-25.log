@@ -1,0 +1,24 @@
+{"level":"info","message":"Attempting to connect to database at dpg-d0c1u5ruibrs73dohhg0-a.oregon-postgres.render.com:5432 with SSL=true","timestamp":"2025-05-25 00:52:43"}
+{"level":"info","message":"server listening on port: 8080","timestamp":"2025-05-25 00:52:43"}
+{"level":"info","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-05-25 00:52:51"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2025-05-25 00:52:51"}
+{"level":"info","message":"Attempting to connect to database at dpg-d0c1u5ruibrs73dohhg0-a.oregon-postgres.render.com:5432 with SSL=true","timestamp":"2025-05-25 00:55:11"}
+{"level":"info","message":"server listening on port: 8080","timestamp":"2025-05-25 00:55:11"}
+{"level":"info","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-05-25 00:55:18"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2025-05-25 00:55:18"}
+{"level":"info","message":"Attempting to connect to database at dpg-d0c1u5ruibrs73dohhg0-a.oregon-postgres.render.com:5432 with SSL=true","timestamp":"2025-05-25 00:58:14"}
+{"level":"info","message":"server listening on port: 8080","timestamp":"2025-05-25 00:58:14"}
+{"level":"info","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-05-25 00:58:20"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2025-05-25 00:58:21"}
+{"level":"info","message":"Attempting to connect to database at dpg-d0c1u5ruibrs73dohhg0-a.oregon-postgres.render.com:5432 with SSL=true","timestamp":"2025-05-25 01:00:52"}
+{"level":"info","message":"server listening on port: 8080","timestamp":"2025-05-25 01:00:52"}
+{"level":"info","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-05-25 01:01:00"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2025-05-25 01:01:00"}
+{"level":"info","message":"Attempting to connect to database at dpg-d0c1u5ruibrs73dohhg0-a.oregon-postgres.render.com:5432 with SSL=true","timestamp":"2025-05-25 01:01:35"}
+{"level":"info","message":"server listening on port: 8080","timestamp":"2025-05-25 01:01:35"}
+{"level":"info","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-05-25 01:01:41"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2025-05-25 01:01:41"}
+{"level":"info","message":"Attempting to connect to database at dpg-d0c1u5ruibrs73dohhg0-a.oregon-postgres.render.com:5432 with SSL=true","timestamp":"2025-05-25 12:27:40"}
+{"level":"info","message":"server listening on port: 8080","timestamp":"2025-05-25 12:27:40"}
+{"level":"info","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-05-25 12:27:47"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2025-05-25 12:27:47"}

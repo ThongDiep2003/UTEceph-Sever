@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "src/log/sharePatient/.aef5290484c8bc60a8f142d990c02c9563b5864a-audit.json",
+    "files": [
+        {
+            "date": 1748108207637,
+            "name": "src/log/sharePatient/sharePatient-2025-05-25.log",
+            "hash": "6fed80bdcc692764f4474e01a4eb791926652654b8e1dea298dcc53aa028cb1d"
+        }
+    ],
+    "hashType": "sha256"
+}

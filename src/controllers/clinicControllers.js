@@ -1,3 +1,5 @@
+'use strict';
+import logger from "../config/winston";
 import clinicServices from "../services/clinicServices"
 import doctorServices from "../services/doctorServices";
 
@@ -10,34 +12,73 @@ const clinicControllers = {
         data: data
       })
     } catch (error) {
-      res.status(400).json({
-        message: error
-      })
+      logger.clinic.error(error);
+      res.status(500).json({
+        message: 'server error'
+      });
     }
   },
   getAllDoctorInClinic: async (req, res) => {
     try {
-      const { status, message, data } = await clinicServices.getAllDoctorInClinic(req.params.id);
+      const { status, message, data, count } = await clinicServices.getAllDoctorInClinic(req.params.id,req.query.page,req.query.pageSize,req.query.nameSearch);
+      const indexOfElement = data.findIndex(element => 
+        element.email === req.query.currentEmailDoctor
+      );
+      if(data && indexOfElement>=0){
+        const elementIndex = data[indexOfElement];
+        data.splice(indexOfElement,1);
+        data.unshift(elementIndex);
+      }
       res.status(status).json({
         message: message,
-        data: data
+        data: data,
+        count: count
       })
     } catch (error) {
-      res.status(400).json({
-        message: error
-      })
+      logger.clinic.error(error);
+      res.status(500).json({
+        message: 'server error'
+      });
     }
   },
   createNewClinic: async (req,res) => {
     try {
-      const { status ,message } = await clinicServices.createNewClinic(req.params.id, req.body);     
+      const { idClinic, status, message } = await clinicServices.createNewClinic(req.params.id, req.body);     
+      res.status(status).json({
+        message: message,
+        idClinic: idClinic
+      })
+    } catch (error) {
+      logger.clinic.error(error);
+      res.status(500).json({
+        message: 'server error'
+      });
+    }
+  },
+  updateRoleOfDoctor: async(req,res) => {
+    try {
+      const { status, message } = await clinicServices.updateRoleOfDoctor(req.params.id,req.body.idDoctor,req.body.roleOfDoctor);
       res.status(status).json({
         message: message
       })
     } catch (error) {
-      res.status(400).json({
-        message: error
+      logger.clinic.error(error);
+      res.status(500).json({
+        message: 'server error'
+      });
+    }
+  },
+  deleteDoctorFromClinic: async (req,res) => {
+    try {
+      const { status, message } = await clinicServices.deleteDoctorFromClinic(req.clinic.id,req.query.idDoctor);
+      res.status(status).json({
+        message: message
       })
+    } catch (error) {
+      logger.clinic.error(error);
+      res.status(500).json({
+        message: 'server error'
+      });
     }
   },
   addDoctorToClinic: async (req,res) => {
@@ -49,15 +90,16 @@ const clinicControllers = {
           message: message
         })
       }else{
-        res.status(400).json({
-          message: messageDoctor,
-          data: doctor
-        })
+        logger.clinic.error(error);
+        res.status(500).json({
+          message: 'server error'
+        });
       }
     } catch (error) {
-      res.status(400).json({
-        message: error
-      })
+      logger.clinic.error(error);
+      res.status(500).json({
+        message: 'server error'
+      });
     }
   },
   getInformationClinic: async (req,res) => {
@@ -68,9 +110,10 @@ const clinicControllers = {
         data: clinic
       })
     } catch (error) {
-      res.status(400).json({
-        message: error
-      })
+      logger.clinic.error(error);
+      res.status(500).json({
+        message: 'server error'
+      });
     }
   },
   updateInformationClinic: async (req, res) => {
@@ -80,9 +123,23 @@ const clinicControllers = {
         message: message
       })
     } catch (error) {
-      res.status(400).json({
-        message: error
+      logger.clinic.error(error);
+      res.status(500).json({
+        message: 'server error'
+      });
+    }
+  },
+  deleteClinic: async (req,res) => {
+    try {
+      const { status, message } = await clinicServices.deleteClinic(req.clinic.id);
+      res.status(status).json({
+        message: message
       })
+    } catch (error) {
+      logger.clinic.error(error);
+      res.status(500).json({
+        message: 'server error'
+      });
     }
   }
 }

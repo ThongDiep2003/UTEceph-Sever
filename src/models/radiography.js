@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Radiography extends Model {
     /**
@@ -11,22 +9,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Radiography.belongsTo(models.Patient, {foreignKey:{name: 'idRadiography', allowNull:false}, targetKey:'id'});
+      Radiography.belongsTo(models.Patient, {
+        foreignKey: { name: "idRadiography", allowNull: false },
+        targetKey: "id",
+      });
     }
   }
-  Radiography.init({
-    idRadiography: DataTypes.INTEGER,
-    sinuses: DataTypes.STRING,
-    condyles: DataTypes.STRING,
-    apparentPathology: DataTypes.STRING,
-    alveolarBoneHeights: DataTypes.STRING,
-    crownRootRatio: DataTypes.STRING,
-    others: DataTypes.STRING,
-    laterakCephalometricRadiography: DataTypes.STRING,
-    otherRadiography: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Radiography',
-  });
+  Radiography.init(
+    {
+      idRadiography: DataTypes.UUID,
+      sinuses: DataTypes.STRING,
+      condyles: DataTypes.STRING,
+      apparentPathology: DataTypes.STRING,
+      alveolarBoneHeights: DataTypes.STRING,
+      crownRootRatio: DataTypes.STRING,
+      others: DataTypes.STRING,
+      lateralCephalometricRadiography: DataTypes.STRING,
+      otherRadiography: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "Radiography",
+    }
+  );
   return Radiography;
 };

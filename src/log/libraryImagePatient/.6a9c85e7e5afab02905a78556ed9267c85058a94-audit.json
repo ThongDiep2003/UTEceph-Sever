@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "src/log/libraryImagePatient/.6a9c85e7e5afab02905a78556ed9267c85058a94-audit.json",
+    "files": [
+        {
+            "date": 1748108207640,
+            "name": "src/log/libraryImagePatient/libraryImagePatient-2025-05-25.log",
+            "hash": "580a1d90543de28c7cd9595a035cdeac64e593dd772f84c9b19d3a8daa1ff43a"
+        }
+    ],
+    "hashType": "sha256"
+}

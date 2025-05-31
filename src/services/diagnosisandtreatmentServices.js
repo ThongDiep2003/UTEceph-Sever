@@ -1,4 +1,7 @@
-const db = require("../models")
+"use strict";
+import logger from "../config/winston";
+
+const db = require("../models");
 
 const diagnosisandtreatmentServices = {
   getDiagnosisAndTreatment: (idPatient) => {
@@ -6,55 +9,67 @@ const diagnosisandtreatmentServices = {
       try {
         const diagnosis = await db.DiagnosisAndTreatment.findOne({
           where: {
-            idDiagnosisAndTreatment: idPatient
-          }
-        })
-        if(diagnosis){
+            idDiagnosisAndTreatment: idPatient,
+          },
+        });
+        if (diagnosis) {
           resolve({
             status: 200,
-            message: 'get diagnosisAndTreatment successfully',
-            data: diagnosis
-          })
-        }else{
+            message: "get diagnosisAndTreatment successfully",
+            data: diagnosis,
+          });
+        } else {
           resolve({
             status: 202,
-            message: 'get diagnosisAndTreatment failed',
-            data: {}
-          })
+            message: "get diagnosisAndTreatment failed",
+            data: null,
+          });
         }
       } catch (error) {
-        reject(error)
+        logger.diagnosis.error(error);
+        reject(error);
       }
-    })
+    });
   },
-  updateDiagnosisAndTreatment: (idPatient,data) => {
-    return new Promise(async (resolve, reject) =>{
+  updateDiagnosisAndTreatment: (idPatient, data) => {
+    return new Promise(async (resolve, reject) => {
       try {
         const dataUpdate = {
           diagnose: data.diagnose,
           prognosisAndNotes: data.prognosisAndNotes,
-        }
-        const diagnosisUpdate = await db.DiagnosisAndTreatment.update(dataUpdate,{
-          where: {
-            idDiagnosisAndTreatment: idPatient
+        };
+        const diagnosisUpdate = await db.DiagnosisAndTreatment.update(
+          dataUpdate,
+          {
+            where: {
+              idDiagnosisAndTreatment: idPatient,
+            },
           }
-        })
-        if(diagnosisUpdate){
+        );
+        if (diagnosisUpdate) {
+          const newDiagnosis = await db.DiagnosisAndTreatment.findOne({
+            where: {
+              idDiagnosisAndTreatment: idPatient,
+            },
+          });
           resolve({
             status: 200,
-            message: 'update diagnosisAndTreatment successfully'
-          })
-        }else{
+            message: "update diagnosisAndTreatment successfully",
+            data: newDiagnosis,
+          });
+        } else {
           resolve({
             status: 202,
-            message: 'update diagnosisAndTreatment failed'
-          })
+            message: "update diagnosisAndTreatment failed",
+            data: null,
+          });
         }
       } catch (error) {
+        logger.diagnosis.error(error);
         reject(error);
       }
-    })
-  }
-}
+    });
+  },
+};
 
 export default diagnosisandtreatmentServices;

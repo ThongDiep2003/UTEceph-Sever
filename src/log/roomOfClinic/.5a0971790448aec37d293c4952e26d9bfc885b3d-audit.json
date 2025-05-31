@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "src/log/roomOfClinic/.5a0971790448aec37d293c4952e26d9bfc885b3d-audit.json",
+    "files": [
+        {
+            "date": 1748108207641,
+            "name": "src/log/roomOfClinic/roomOfClinic-2025-05-25.log",
+            "hash": "2815777d447f9ca5c0845c99b47fd2061e9247ea6faa160a332aeef0add1aace"
+        }
+    ],
+    "hashType": "sha256"
+}

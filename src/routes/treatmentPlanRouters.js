@@ -1,13 +1,45 @@
-import express from 'express';
-import treatmentPlanControllers from '../controllers/treatmentPlanControllers';
-import middlewareController from '../middleware/middlewareController';
-import patientMiddleware from '../middleware/patientMiddleware';
+"use-strict";
+import express from "express";
+import treatmentPlanControllers from "../controllers/treatmentPlanControllers";
+import doctorMiddleware from "../middleware/doctorMiddleware";
+import middlewareController from "../middleware/middlewareController";
+import patientMiddleware from "../middleware/patientMiddleware";
 
 const router = express.Router();
 
-router.get('/:id', middlewareController.verifyToken, patientMiddleware.checkPatientExists, treatmentPlanControllers.getAllTreatmentPlan);
-router.post('/createPlan/:id', middlewareController.verifyToken, patientMiddleware.checkPatientExists ,treatmentPlanControllers.createTreatmentPlan);
-router.put('/updatePlan/:idPlan/:id', middlewareController.verifyToken, patientMiddleware.checkPatientExists ,treatmentPlanControllers.updateTreatmentPlan);
-router.delete('/deletePlan/:idPlan/:id', middlewareController.verifyToken, patientMiddleware.checkPatientExists, treatmentPlanControllers.deleteTreatmentPlan);
+router.get(
+  "/:id",
+  middlewareController.verifyToken,
+  patientMiddleware.checkPatient,
+  doctorMiddleware.checkRoleDoctor,
+  treatmentPlanControllers.getAllTreatmentPlan
+);
+router.get(
+  "/getSelectedTreatmentPlan/:id",
+  middlewareController.verifyToken,
+  patientMiddleware.checkPatient,
+  treatmentPlanControllers.getSelectedTreatmentPlan
+);
+router.post(
+  "/createPlan/:id",
+  middlewareController.verifyToken,
+  patientMiddleware.checkPatient,
+  doctorMiddleware.checkRoleDoctor,
+  treatmentPlanControllers.createTreatmentPlan
+);
+router.put(
+  "/updatePlan/:id",
+  middlewareController.verifyToken,
+  patientMiddleware.checkPatient,
+  doctorMiddleware.checkRoleDoctor,
+  treatmentPlanControllers.updateTreatmentPlan
+);
+router.delete(
+  "/deletePlan/:id",
+  middlewareController.verifyToken,
+  patientMiddleware.checkPatient,
+  doctorMiddleware.checkRoleDoctor,
+  treatmentPlanControllers.deleteTreatmentPlan
+);
 
 export default router;

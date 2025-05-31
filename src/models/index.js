@@ -30,6 +30,16 @@ const customConfig = {
     raw: true,
   },
   timezone: "+07:00",
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 60000,
+    idle: 10000
+  },
+  retry: {
+    max: 3,
+    timeout: 60000
+  }
 };
 
 sequelize = new Sequelize(

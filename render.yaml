@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: uteceph-backend
+    env: docker
+    rootDir: .
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Add more environment variables as needed, or set them in the Render dashboard
+    # Docker configuration
+    dockerfilePath: ./Dockerfile
+    # Optional: Specify the Docker context
+    dockerContext: .
+    # Optional: Specify the port to expose
+    port: 8080

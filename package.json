@@ -1,5 +1,5 @@
 {
-  "name": "uteceph-server",
+  "name": "uteceph-backend",
   "version": "0.0.1",
   "private": true,
   "scripts": {
